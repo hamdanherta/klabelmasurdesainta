@@ -1,0 +1,10 @@
+[phases.setup]
+nixPkgs = ["php", "composer"]
+
+[phases.build]
+cmds = [
+  "composer install --no-dev --optimize-autoloader"
+]
+
+[start]
+cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"

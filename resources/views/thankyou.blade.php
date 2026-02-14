@@ -28,7 +28,7 @@
         <div class="text-center mb-8 md:mb-10 px-4">
             <p class="text-gray-700 text-base md:text-lg">
                 3 Orang Beruntung akan di undi untuk<br class="hidden md:block">
-                Mendapatkan Saldo Total 300K.<br class="hidden md:block">
+                Mendapatkan Saldo Total 100K.<br class="hidden md:block">
                 Semoga Kamu Beruntung ya!
             </p>
         </div>

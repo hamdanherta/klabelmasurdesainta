@@ -22,7 +22,7 @@
             
             <!-- Item 3 (Complex Formatting) -->
             <div class="text-base md:text-lg text-gray-800 leading-relaxed">
-                <p>Anda Hanya akan di Berikan <span class="text-pink-500 font-bold not-italic">10 Kombinasi Warna</span>,</p>
+                <p>Anda Hanya akan di Berikan <span class="text-pink-500 font-bold not-italic"><br>10 Kombinasi Warna</span>,</p>
                 <p>Dan Anda Cukup Menjawab Kombinasi Warnanya "<span class="text-pink-500 font-bold not-italic">Cocok</span>" atau "<span class="text-pink-500 font-bold not-italic">Tidak</span>".</p>
                 <p>( Menurut Pandangan Anda Sendiri )</p>
             </div>

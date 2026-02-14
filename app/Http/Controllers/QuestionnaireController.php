@@ -39,6 +39,34 @@ class QuestionnaireController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Check for duplicate submission in CSV
+        $filePath = public_path('responses.csv');
+        if (file_exists($filePath)) {
+            if (($handle = fopen($filePath, "r")) !== FALSE) {
+                $header = fgetcsv($handle); // Skip header
+                while (($data = fgetcsv($handle)) !== FALSE) {
+                    // CSV structure: id, nama, 'nowa, ...
+                    // Check if nama and nowa match
+                    // Handle potential leading quote in nowa
+                    $csvNama = $data[1] ?? '';
+                    $csvNowa = $data[2] ?? '';
+
+                    // Remove leading single quote if present
+                    if (str_starts_with($csvNowa, "'")) {
+                        $csvNowa = substr($csvNowa, 1);
+                    }
+
+                    if (strcasecmp($csvNama, $request->nama) === 0 && $csvNowa == $request->nowa) {
+                        fclose($handle);
+                        return redirect()->back()
+                            ->withErrors(['msg' => 'Kamu sudah mengisi kusioner ini.'])
+                            ->withInput();
+                    }
+                }
+                fclose($handle);
+            }
+        }
+
         session(['respondent_nama' => $request->nama, 'respondent_nowa' => $request->nowa]);
 
         return redirect()->route('questionnaire.index');

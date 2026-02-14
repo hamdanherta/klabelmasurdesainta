@@ -12,28 +12,20 @@
         <!-- Heading -->
         <div class="text-center mb-8">
             <h2 class="text-xl md:text-2xl font-bold text-pink-500 mb-1">Oke Terima Kasih.</h2>
-            <p class="text-lg md:text-xl text-gray-700">Berikut adalah Tutorial Cara Mengisi Kuisioner ini.</p>
+            <p class="text-lg md:text-xl text-gray-700">Berikut adalah TUTORIAL Cara Mengisi Kuisioner ini.</p>
         </div>
 
         <!-- Tutorial List -->
         <div class="w-full max-w-4xl text-left space-y-4 mb-12 pl-0 md:pl-0">
             <!-- Item 1 -->
-            <p class="text-lg md:text-xl font-bold text-gray-800">Setelah Meng-Klik "Oke, Saya Paham" dan "Saya Siap!" Masukkan Nama & No WA Anda</p>
-            
-            <!-- Item 2 -->
-            <p class="text-lg md:text-xl font-bold text-gray-800">Klik Mulai.</p>
+            <p class="text-lg md:text-xl font-bold text-gray-800">JANGAN KHAWATIR! <br> Anda Tidak akan Diberikan Pertanyaan seperti Kuisioner pada Umumnya.</p>
             
             <!-- Item 3 (Complex Formatting) -->
             <div class="text-base md:text-lg text-gray-800 leading-relaxed">
-                <p>Anda akan di Berikan <span class="text-pink-500 font-bold not-italic">10 Kombinasi Warna</span>,</p>
-                <p>Anda Cukup Menjawab Kombinasi Warnanya "<span class="text-pink-500 font-bold not-italic">Cocok</span>" atau "<span class="text-pink-500 font-bold not-italic">Tidak</span>".</p>
+                <p>Anda Hanya akan di Berikan <span class="text-pink-500 font-bold not-italic">10 Kombinasi Warna</span>,</p>
+                <p>Dan Anda Cukup Menjawab Kombinasi Warnanya "<span class="text-pink-500 font-bold not-italic">Cocok</span>" atau "<span class="text-pink-500 font-bold not-italic">Tidak</span>".</p>
                 <p>( Menurut Pandangan Anda Sendiri )</p>
             </div>
-            
-            <!-- Item 4 -->
-            <p class="text-lg md:text-xl font-bold text-gray-800 mt-4">Jika sudah Klik "Cocok" atau "Tidak",  Klik Lanjut. Sampai ke Kombinasi 10</p>
-
-            <p class="text-lg md:text-xl font-bold text-gray-800 mt-4">Jika Sudah sampai ke Kombinasi 10, Maka Anda Dapat Melihat Tombol Simpan.</p>
 
         </div>
 

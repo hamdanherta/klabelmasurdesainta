@@ -63,9 +63,9 @@
                     Download Hasil Kusioner
                 </a>
 
-                <button @click="showResetModal = true" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 md:py-4 md:px-12 rounded-full text-lg md:text-xl shadow-lg transition duration-300 transform hover:scale-105 w-full md:w-auto text-center">
+                <!-- <button @click="showResetModal = true" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 md:py-4 md:px-12 rounded-full text-lg md:text-xl shadow-lg transition duration-300 transform hover:scale-105 w-full md:w-auto text-center">
                     Reset Data CSV
-                </button>
+                </button> -->
             </div>
         </div>
 

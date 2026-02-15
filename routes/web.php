@@ -17,9 +17,7 @@ Route::get('/identity', [QuestionnaireController::class , 'identity'])->name('id
 Route::post('/identity', [QuestionnaireController::class , 'storeIdentity'])->name('identity.store');
 Route::get('/questionnaire', [QuestionnaireController::class , 'index'])->name('questionnaire.index');
 Route::post('/questionnaire', [QuestionnaireController::class , 'store'])->name('questionnaire.store');
-Route::get('/thank-you', function () {
-    return view('thankyou');
-})->name('thankyou');
+Route::get('/thank-you', [QuestionnaireController::class , 'thankyou'])->name('thankyou');
 
 // Admin Routes
 Route::get('/admin/login', function () {

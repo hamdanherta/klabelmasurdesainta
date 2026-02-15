@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ColorDataset;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewSubmissionMail;
 
 class QuestionnaireController extends Controller
 {
@@ -130,6 +132,29 @@ class QuestionnaireController extends Controller
         // Write to PUBLIC path
         $filePath = public_path('responses.csv');
 
+        // Check for duplicate submission in CSV before writing
+        if (file_exists($filePath)) {
+            if (($handle = fopen($filePath, "r")) !== FALSE) {
+                $header = fgetcsv($handle); // Skip header
+                while (($row = fgetcsv($handle)) !== FALSE) {
+                    $csvNama = $row[1] ?? '';
+                    $csvNowa = $row[2] ?? '';
+
+                    // Remove leading single quote if present
+                    if (str_starts_with($csvNowa, "'")) {
+                        $csvNowa = substr($csvNowa, 1);
+                    }
+
+                    if (strcasecmp($csvNama, $nama) === 0 && $csvNowa == $nowa) {
+                        fclose($handle);
+                        // Redirect to thank you page without saving, effectively ignoring duplicate
+                        return redirect()->route('thankyou')->with('last_submitted_name', $nama);
+                    }
+                }
+                fclose($handle);
+            }
+        }
+
         try {
             if (!file_exists($filePath)) {
                 $header = ['id', 'nama', 'nowa', 'kom_1', 'kom_2', 'kom_3', 'kom_4', 'kom_5', 'kom_6', 'kom_7', 'kom_8', 'kom_9', 'kom_10', 'timestamp'];
@@ -137,16 +162,34 @@ class QuestionnaireController extends Controller
             }
 
             file_put_contents($filePath, $csvLine, FILE_APPEND);
+
+            // Send Email Notification
+            // Prepare data array for email (associative)
+            $emailData = [
+                'nama' => $nama,
+                'nowa' => $nowa,
+                'timestamp' => $data[13] ?? now()->toDateTimeString(),
+            ];
+            for ($i = 1; $i <= 10; $i++) {
+                $compVal = $request->input("kom_$i");
+                $emailData["kom_$i"] = ($compVal === 'cocok') ? 1 : 0;
+            }
+
+            Mail::to('hamdanerbic@gmail.com')->send(new NewSubmissionMail($emailData));
+
         }
         catch (\Exception $e) {
-        // Silently fail or log if possible
+            // Log error but allow process to continue
+            \Illuminate\Support\Facades\Log::error('Submission Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('thankyou');
+        return redirect()->route('thankyou')->with('last_submitted_name', $nama);
     }
 
     public function thankyou()
     {
-        return view('thankyou');
+        // Prioritize the name from the immediate submission, fallback to session
+        $nama = session('last_submitted_name') ?? session('respondent_nama');
+        return view('thankyou', compact('nama'));
     }
 }

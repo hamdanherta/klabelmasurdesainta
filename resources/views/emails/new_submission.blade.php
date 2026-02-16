@@ -5,7 +5,7 @@
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
     <h2 style="color: #d63384;">Respon Kuesioner Baru Diterima!</h2>
-    <p>Halo Admin,</p>
+    <p>Halo Hamdani,</p>
     <p>Ada responden baru yang telah menyelesaikan kuesioner.</p>
     
     <h3>Data Responden:</h3>

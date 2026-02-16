@@ -7,14 +7,19 @@
         currentStep: 1, 
         totalSteps: 10,
         answers: {},
+        showModal: false,
         selectAnswer(step, value) {
             this.answers['kom_' + step] = value;
         },
         nextStep() {
             if (this.currentStep < this.totalSteps) {
                 this.currentStep++;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
-                this.$refs.form.submit();
+                this.showModal = true;
+                setTimeout(() => {
+                    this.$refs.form.submit();
+                }, 1500); // 1.5s delay to show the modal
             }
         },
         isAnswered(step) {
@@ -81,12 +86,19 @@
                         </div>
                         
                         <!-- Status Indicator -->
-                        <div class="text-gray-700 font-medium text-lg flex items-center whitespace-nowrap flex-shrink-0 ml-0 md:ml-4 self-end md:self-auto" x-show="isAnswered({{ $loop->iteration }})">
+                        <div class="text-gray-700 font-medium text-lg flex items-center whitespace-nowrap shrink-0 ml-0 md:ml-4 self-end md:self-auto" x-show="isAnswered({{ $loop->iteration }})">
                             Status : <span x-text="answers['kom_{{ $loop->iteration }}'] === 'cocok' ? 'Cocok' : 'Tidak Cocok'" class="ml-1 font-bold"></span> 
-                            <div class="bg-green-500 text-white rounded-md p-0.5 ml-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
+                            <div class="rounded-md p-0.5 ml-2" :class="answers['kom_{{ $loop->iteration }}'] === 'cocok' ? 'bg-green-500' : 'bg-red-500'">
+                                <template x-if="answers['kom_{{ $loop->iteration }}'] === 'cocok'">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </template>
+                                <template x-if="answers['kom_{{ $loop->iteration }}'] === 'tidak_cocok'">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -110,6 +122,76 @@
                     </div>
                 </div>
             @endforeach
+
+
+            <!-- Loading Modal -->
+            <div x-show="showModal" 
+                 class="fixed inset-0 z-9999 px-4 flex items-center justify-center bg-gray-900/60 backdrop-blur-md transition-opacity duration-300"
+                 style="display: none;"
+                 x-transition:enter="ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0">
+                
+                <div class="bg-white rounded-3xl p-8 md:p-12 w-full max-w-2xl text-center shadow-2xl transform transition-transform duration-300"
+                     x-transition:enter="ease-out duration-300"
+                     x-transition:enter-start="opacity-0 scale-90"
+                     x-transition:enter-end="opacity-100 scale-100">
+                    
+                    <!-- Spinner Container -->
+                    <div class="mb-8 w-20 h-20 mx-auto relative shrink-0">
+                         <div class="loading-spinner">
+                            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                         </div>
+                    </div>
+
+                    <!-- Text Content -->
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-3xl font-bold text-gray-700 leading-tight">Proses Menyimpan</h2>
+                        <p class="text-gray-500 text-xl font-medium">Tunggu Sebentar</p>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .loading-spinner {
+                    color: #ec4899;
+                    display: inline-block;
+                    position: relative;
+                    width: 80px;
+                    height: 80px;
+                }
+                .loading-spinner div {
+                    transform-origin: 40px 40px;
+                    animation: loading-spinner 1.2s linear infinite;
+                }
+                .loading-spinner div:after {
+                    content: " ";
+                    display: block;
+                    position: absolute;
+                    top: 3px;
+                    left: 37px; /* (80-6)/2 = 37 centered horizontally relative to axis? width is 6. 37+3=40. yes. */
+                    width: 6px;
+                    height: 18px;
+                    border-radius: 20%;
+                    background: #ec4899;
+                }
+                .loading-spinner div:nth-child(1) { transform: rotate(0deg); animation-delay: -1.1s; }
+                .loading-spinner div:nth-child(2) { transform: rotate(45deg); animation-delay: -1.0s; }
+                .loading-spinner div:nth-child(3) { transform: rotate(90deg); animation-delay: -0.9s; }
+                .loading-spinner div:nth-child(4) { transform: rotate(135deg); animation-delay: -0.8s; }
+                .loading-spinner div:nth-child(5) { transform: rotate(180deg); animation-delay: -0.7s; }
+                .loading-spinner div:nth-child(6) { transform: rotate(225deg); animation-delay: -0.6s; }
+                .loading-spinner div:nth-child(7) { transform: rotate(270deg); animation-delay: -0.5s; }
+                .loading-spinner div:nth-child(8) { transform: rotate(315deg); animation-delay: -0.4s; }
+                @keyframes loading-spinner {
+                    0% { opacity: 1; }
+                    100% { opacity: 0; }
+                }
+            </style>
+
         </form>
     </div>
 @endsection

@@ -18,8 +18,7 @@
 
             <!-- Right Side: Message -->
             <div class="text-center md:text-left w-full md:w-1/2 leading-none">
-                <p class="text-lg md:text-xl font-bold text-pink-500 mb-1">Atas Waktu</p>
-                <p class="text-lg md:text-xl font-bold text-pink-500 mb-1">dan Jawabannya.</p>
+                <p class="text-lg md:text-xl font-bold text-pink-500 mb-1">Atas Waktu dan Jawabannya</p>
                 <p class="text-lg md:text-xl font-bold text-gray-600 leading-snug mt-4 md:mt-2">Senang Bisa Melibatkan<br class="hidden md:block"> Anda dalam Penelitian ini.</p>
             </div>
         </div>
@@ -28,7 +27,7 @@
         <div class="text-center mb-8 md:mb-10 px-4">
             <p class="text-gray-700 text-base md:text-lg">
                 3 Orang Beruntung akan di undi untuk<br class="hidden md:block">
-                Mendapatkan Saldo Total 100K.<br class="hidden md:block">
+                Mendapatkan Saldo Total 300K.<br class="hidden md:block">
                 Semoga Kamu Beruntung ya!
             </p>
         </div>
@@ -50,25 +49,64 @@
     </div>
 
     <!-- Success Modal -->
-    <div id="successModal" class="fixed inset-0 z-[9999] px-4 flex items-center justify-center bg-gray-900/60 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-[2rem] p-8 md:p-12 w-full max-w-2xl text-center shadow-2xl transform scale-95 transition-transform duration-300" id="modalContent">
+    <div id="successModal" class="fixed inset-0 z-9999 px-4 items-center justify-center bg-gray-900/60 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl p-8 md:p-12 w-full max-w-2xl text-center shadow-2xl transform scale-95 transition-transform duration-300" id="modalContent">
             
             <!-- Success Icon/Heading -->
-            <div class="flex items-center justify-center mb-6">
-                <!-- Check Icon Circle -->
-                <div class="bg-pink-500 text-white rounded-full p-2 mr-6 flex items-center justify-center w-12 h-12 shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            <!-- Success Icon/Heading -->
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <!-- Animated Check Icon -->
+                <div class="w-12 h-12 relative flex items-center justify-center">
+                    <svg class="checkmark-animated w-full h-full text-pink-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                     </svg>
                 </div>
-                <h3 class="text-4xl md:text-5xl font-bold text-pink-500 tracking-tight">Berhasil</h3>
+                <h3 class="text-4xl md:text-5xl font-bold text-pink-500 tracking-tight">Berhasil!</h3>
             </div>
+
+            <style>
+                .checkmark-animated {
+                    border-radius: 50%;
+                    display: block;
+                    stroke-width: 6;
+                    stroke: #FF0492;
+                    stroke-miterlimit: 10;
+                    animation: scale .3s ease-in-out .9s both;
+                }
+                
+                .checkmark-circle {
+                    stroke-dasharray: 166;
+                    stroke-dashoffset: 166;
+                    stroke-width: 8;
+                    stroke-miterlimit: 10;
+                    stroke: #FF0492;
+                    fill: none;
+                    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+                }
+                
+                .checkmark-check {
+                    transform-origin: 50% 50%;
+                    stroke-dasharray: 48;
+                    stroke-dashoffset: 48;
+                    stroke: #FF0492;
+                    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+                }
+                
+                @keyframes stroke {
+                    100% { stroke-dashoffset: 0; }
+                }
+                @keyframes scale {
+                    0%, 100% { transform: none; }
+                    50% { transform: scale3d(1.1, 1.1, 1); }
+                }
+            </style>
 
             <hr class="border-gray-200 mb-8 mx-auto w-3/4">
 
             <!-- Message -->
             <h4 class="text-2xl md:text-3xl font-bold text-gray-700 mb-3">Sukses Selalu</h4>
-            <div class="text-4xl md:text-5xl font-extrabold text-pink-500 mb-10 break-words leading-tight drop-shadow-sm">
+            <div class="text-4xl md:text-5xl font-extrabold text-pink-500 mb-10 wrap-break-word leading-tight drop-shadow-sm">
                 {{ $nama ?? 'Teman' }}
             </div>
 
@@ -87,6 +125,7 @@
             // Show modal with fade-in effect
             setTimeout(() => {
                 modal.classList.remove('hidden');
+                modal.classList.add('flex');
                 // Trigger reflow
                 void modal.offsetWidth; 
                 modal.classList.remove('opacity-0');
@@ -104,6 +143,7 @@
             modalContent.classList.add('scale-95');
             
             setTimeout(() => {
+                modal.classList.remove('flex');
                 modal.classList.add('hidden');
             }, 300); // Wait for transition
         }

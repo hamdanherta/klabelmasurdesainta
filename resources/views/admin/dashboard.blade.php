@@ -82,7 +82,7 @@
             <div class="fixed inset-0 bg-gray-900/30 backdrop-blur-md transition-opacity" aria-hidden="true" @click="showResetModal = false"></div>
 
             <div class="flex items-center justify-center min-h-screen px-4">
-                <div class="bg-white rounded-[2rem] p-6 md:p-10 max-w-sm md:max-w-md w-full shadow-2xl transform transition-all relative">
+                <div class="bg-white rounded-4xl p-6 md:p-10 max-w-sm md:max-w-md w-full shadow-2xl transform transition-all relative">
                     
                     <div class="text-center">
                         <h3 class="text-2xl md:text-4xl font-bold text-pink-500 mb-6 md:mb-10 leading-snug">

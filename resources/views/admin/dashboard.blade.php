@@ -73,7 +73,7 @@
                     <div class="p-6 bg-pink-100 border-b border-pink-200 flex flex-col justify-between items-center gap-6">
                         <div class="flex flex-col items-center gap-3 w-full md:w-auto">
                             <h3 class="text-2xl text-center font-bold text-pink-600">Daftar Responden</h3>
-                            <span class="bg-white text-pink-500 text-xs font-bold px-4 py-1.5 rounded-full border border-pink-200 whitespace-nowrap shadow-sm">
+                            <span class="bg-white text-pink-500 text-xs font-bold px-4 py-1.5 rounded-full px-4 border border-pink-200 whitespace-nowrap shadow-sm">
                                 Bagian {{ $respondents->currentPage() }}
                             </span>
                         </div>
@@ -81,8 +81,8 @@
                         <form action="{{ route('admin.dashboard') }}" method="GET" class="w-full md:w-full">
                             <div class="relative w-full">
                                 <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Cari Nama..." 
-                                       class="w-full pl-5 pr-12 py-3 rounded-full border border-pink-200 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base shadow-sm transition-all duration-300">
-                                <button type="submit" class="absolute inset-y-0 right-0 pr-4 flex items-center hover:text-pink-600 focus:outline-none transition-colors duration-200">
+                                       class="w-full px-4 pr-10 py-3 rounded-full border border-pink-200 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base shadow-sm transition-all duration-300">
+                                <button type="submit" class="absolute inset-y-0 right-0 px-4 pr-0 flex items-center hover:text-pink-600 focus:outline-none transition-colors duration-200">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-400" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                     </svg>
@@ -90,19 +90,19 @@
                             </div>
                         </form>
                     </div>
-                    
+                     
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead class="bg-gray-50">
+                        <table class="w-full text-center gap-4 border-collapse">
+                            <thead class="bg-gray-50 mb-2">
                                 <tr>
-                                    <th class="py-4 px-6 font-bold text-sm text-gray-500 border-b border-gray-200">Nama</th>
+                                    <th class="py-4 px-6 font-bold text-sm text-gray-500 border-b border-gray-200">Nama Nama Responden</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-200">
+                            <tbody class="divide-y divide-gray-400">
                                 @if(isset($respondents) && count($respondents) > 0)
                                     @foreach($respondents as $respondent)
                                         <tr class="hover:bg-pink-50 transition duration-150 group">
-                                            <td class="py-4 px-6 text-gray-800 font-bold text-lg group-hover:text-pink-600 transition-colors">{{ $respondent['nama'] }}</td>
+                                            <td class="py-6 px-6 text-gray-800 font-bold  text-lg group-hover:text-pink-600 transition-colors">{{ $respondent['nama'] }}</td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -115,7 +115,7 @@
                     </div>
 
                     <!-- Pagination Links -->
-                    <div class="p-4 border-t border-gray-200 bg-gray-50 flex justify-center">
+                    <div class="p-4 border-t border-gray-200 mt-4  bg-gray-50 flex justify-center">
                         {{ $respondents->links('pagination::tailwind') }}
                     </div>
                 </div>

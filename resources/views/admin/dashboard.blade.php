@@ -51,6 +51,10 @@
 
                  <!-- Action Buttons -->
                 <div class="w-full flex flex-col items-center md:items-start space-y-4">
+                    <a href="{{ route('welcome') }}" class="w-full bg-green-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg transition duration-300 transform hover:scale-105 text-center flex items-center justify-center gap-2">
+                        Ke Beranda
+                    </a>
+
                     <a href="{{ route('admin.download') }}" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg transition duration-300 transform hover:scale-105 text-center flex items-center justify-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

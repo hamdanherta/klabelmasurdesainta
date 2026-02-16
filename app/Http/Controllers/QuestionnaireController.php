@@ -12,7 +12,28 @@ class QuestionnaireController extends Controller
 {
     public function welcome()
     {
-        return view('welcome');
+        $names = [];
+        $filePath = public_path('responses.csv');
+        if (file_exists($filePath)) {
+            if (($handle = fopen($filePath, "r")) !== FALSE) {
+                $header = fgetcsv($handle); // Skip header
+                while (($data = fgetcsv($handle)) !== FALSE) {
+                    if (isset($data[1]) && !empty($data[1])) {
+                        $names[] = $data[1];
+                    }
+                }
+                fclose($handle);
+            }
+        }
+
+        // Reverse to show latest first? or random? or just as is. 
+        // Let's keep it as is or maybe latest first. 
+        // User said "nama nama yang telah mengisi", implied all.
+        // Let's optimize by taking only unique names maybe? 
+        // Actually, let's just reverse it to show latest submissions first, looks more dynamic.
+        $names = array_reverse($names);
+
+        return view('welcome', compact('names'));
     }
 
     public function tutorial()

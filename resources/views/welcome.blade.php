@@ -45,6 +45,36 @@
                     Lanjutkan
                 </a>
 
+                <!-- Running Text of Respondents -->
+                @if(isset($names) && count($names) > 0)
+                    <div class="mt-8 w-full max-w-lg overflow-hidden relative">
+                        <p class="text-sm text-gray-500 mb-2 font-medium">Beberapa Orang yang telah Mengisi Kuesioner ini :</p>
+                        <div class="relative w-full overflow-hidden bg-pink-50 rounded-full py-3 shadow-sm">
+                            <div class="whitespace-nowrap inline-block animate-marquee hover:pause">
+                                @foreach($names as $name)
+                                    <span class="mx-4 text-pink-500 font-bold">{{ $name }}</span>
+                                    <span class="text-gray-300"> • </span>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                        .animate-marquee {
+                            display: inline-block;
+                            padding-left: 100%;
+                            animation: marquee 25s linear infinite;
+                        }
+                        .hover\:pause:hover {
+                            animation-play-state: paused;
+                        }
+                        @keyframes marquee {
+                            0% { transform: translate(0, 0); }
+                            100% { transform: translate(-100%, 0); }
+                        }
+                    </style>
+                @endif
+
             </div>
         </div>
 

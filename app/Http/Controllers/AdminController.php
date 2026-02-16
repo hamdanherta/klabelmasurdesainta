@@ -47,11 +47,55 @@ class AdminController extends Controller
                         $lastRespondentName = $data[1];
                         $lastRespondentTime = $data[13];
                     }
+
+                    // Parse all respondents for the table (skip header)
+                    for ($i = 1; $i < $lineCount; $i++) {
+                        $lineData = str_getcsv($lines[$i]);
+                        if (count($lineData) >= 14) {
+                            $respondents[] = [
+                                'nama' => $lineData[1],
+                                'nowa' => $lineData[2], // Optional: displaying WA too? User only asked for 'nama'
+                                'timestamp' => $lineData[13]
+                            ];
+                        }
+                    }
+                    // Reverse to show latest first
+                    $respondents = array_reverse($respondents);
                 }
             }
         }
 
-        return view('admin.dashboard', compact('responseCount', 'lastRespondentName', 'lastRespondentTime'));
+        // Search Logic
+        $search = request('search');
+        if ($search) {
+            $respondents = array_filter($respondents, function ($respondent) use ($search) {
+                return stripos($respondent['nama'], $search) !== false;
+            });
+        }
+
+        // Pagination Logic
+        $perPage = 5;
+        $currentPage = \Illuminate\Pagination\Paginator::resolveCurrentPage() ?: 1;
+        $currentItems = array_slice($respondents, ($currentPage - 1) * $perPage, $perPage);
+        $respondentsPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
+            $currentItems,
+            count($respondents),
+            $perPage,
+            $currentPage,
+        ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
+            );
+
+        if ($search) {
+            $respondentsPaginator->appends(['search' => $search]);
+        }
+
+        return view('admin.dashboard', [
+            'responseCount' => $responseCount,
+            'lastRespondentName' => $lastRespondentName,
+            'lastRespondentTime' => $lastRespondentTime,
+            'respondents' => $respondentsPaginator,
+            'search' => $search
+        ]);
     }
 
     public function downloadCsv()

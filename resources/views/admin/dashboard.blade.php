@@ -2,11 +2,11 @@
 
 @section('content')
     <script src="//unpkg.com/alpinejs" defer></script>
-    <div x-data="{ showResetModal: false }" class="flex flex-col items-center justify-start w-full max-w-7xl mx-auto px-4 min-h-screen pt-5 pb-10">
+    <div x-data="{ showResetModal: false }" class="flex flex-col items-center justify-center w-full min-h-screen pt-5 pb-10">
         
         <!-- Top Logo -->
         <div class="text-center mb-16 md:mb-24">
-            <a href="{{ route('welcome') }}">
+            <a href="{{ route('admin.dashboard') }}">
                 <img src="{{ asset('images/desainta_logo.png') }}" alt="DESAINITA Logo" class="h-20 md:h-28 mx-auto hover:opacity-80 transition duration-300">
             </a>
         </div>
@@ -24,48 +24,101 @@
         @endif
 
         <!-- Main Content Area -->
-        <div class="w-full flex flex-col md:flex-row justify-between items-center px-4 md:px-12">
+        <div class="w-full flex flex-col md:flex-row justify-between items-start px-4 md:px-12 gap-8 md:gap-12">
             
-            <!-- Left Side: Welcome Message -->
-            <div class="flex flex-col items-center md:items-start w-full md:w-1/2 mb-10 md:mb-0">
-                <h2 class="text-5xl md:text-7xl font-bold text-pink-500 leading-none mb-2 text-center md:text-left">Selamat</h2>
-                <h2 class="text-5xl md:text-7xl font-bold text-pink-500 leading-none mb-2 text-center md:text-left">Datang.</h2>
-                <h2 class="text-5xl md:text-7xl font-bold text-gray-600 leading-none text-center md:text-left">{{ auth()->user()->name }}</h2>
+            <!-- Left Side: Welcome & Stats & Logout -->
+            <div class="flex flex-col items-center md:items-start w-full md:w-5/12 mb-10 md:mb-0 space-y-8 gap-6 sticky top-10">
+                
+                <div>
+                    <h2 class="text-5xl md:text-7xl font-bold text-pink-500 leading-none mb-2 text-center md:text-left">Selamat</h2>
+                    <h2 class="text-5xl md:text-7xl font-bold text-pink-500 leading-none mb-2 text-center md:text-left">Datang.</h2>
+                    <h2 class="text-5xl md:text-7xl font-bold text-gray-600 leading-none text-center md:text-left">{{ auth()->user()->name }}</h2>
+                </div>
                 
                 <!-- Data Count Info -->
-                <div class="mt-6 bg-pink-50 rounded-xl p-4 border border-pink-200 text-center md:text-left shadow-sm">
-                    <p class="text-gray-600 font-bold text-lg">Total Data Masuk:</p>
-                    <p class="text-4xl font-extrabold text-pink-600 mb-2">{{ $responseCount }} <span class="text-lg text-pink-400 font-medium">Responden</span></p>
+                <div class="w-full bg-pink-50 rounded-xl p-6 border border-pink-200 text-center md:text-left shadow-sm">
+                    <p class="text-gray-600 font-bold text-lg">Jumlah Responden :</p>
+                    <p class="text-4xl font-extrabold text-pink-600 mb-2">{{ $responseCount }} <span class="text-lg text-pink-400 font-medium">Orang</span></p>
                     
                     @if($responseCount > 0)
-                        <div class="mt-2 pt-2 border-t border-pink-200">
-                            <p class="text-sm text-gray-500 font-semibold">Responden Terakhir:</p>
-                            <p class="text-lg font-bold text-gray-800">{{ $lastRespondentName }}</p>
-                            <p class="text-xs text-gray-500">{{ $lastRespondentTime }}</p>
+                        <div class="mt-4 pt-4 border-t border-pink-200">
+                            <p class="text-sm text-gray-500 font-semibold mb-1">Responden Terakhir:</p>
+                            <p class="text-xl font-bold text-gray-800">{{ $lastRespondentName }}</p>
+                            <p class="text-sm text-gray-500">{{ $lastRespondentTime }}</p>
                         </div>
                     @endif
                 </div>
 
-                 <!-- Logout Button -->
-                <div class="mt-8 w-full flex justify-center md:justify-start">
-                    <form action="{{ route('admin.logout') }}" method="POST">
+                 <!-- Action Buttons -->
+                <div class="w-full flex flex-col items-center md:items-start space-y-4">
+                    <a href="{{ route('admin.download') }}" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg transition duration-300 transform hover:scale-105 text-center flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download CSV
+                    </a>
+                    
+                    <form action="{{ route('admin.logout') }}" method="POST" class="w-full">
                         @csrf
-                        <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 md:py-3 md:px-12 rounded-full text-lg md:text-xl shadow-md transition duration-300 transform hover:scale-105">
+                        <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-xl text-lg shadow-md transition duration-300 transform hover:scale-105">
                             Logout
                         </button>
                     </form>
                 </div>
             </div>
 
-            <!-- Right Side: Action Buttons -->
-            <div class="text-center md:text-right w-full md:w-1/2 flex flex-col items-center md:items-end space-y-4">
-                <a href="{{ route('admin.download') }}" class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 md:py-4 md:px-12 rounded-full text-lg md:text-xl shadow-lg transition duration-300 transform hover:scale-105 w-full md:w-auto text-center">
-                    Download Hasil Kusioner
-                </a>
+            <!-- Right Side: Respondent Table -->
+            <div class="w-full md:w-7/12">
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                    <div class="p-6 bg-pink-50 border-b border-pink-100 flex flex-col justify-between items-center gap-4">
+                        <div class="flex-col items-center space-y-4 w-full md:w-auto">
+                            <h3 class="text-2xl text-center font-bold text-pink-600">Daftar Responden</h3>
+                            <span class="bg-white text-pink-500 text-xs font-bold px-3 py-1 rounded-full border border-pink-200 whitespace-nowrap">
+                                Bagian {{ $respondents->currentPage() }}
+                            </span>
+                        </div>
+                        
+                        <form action="{{ route('admin.dashboard') }}" method="GET" class="w-full md:w-full">
+                            <div class="relative w-full">
+                                <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Cari Nama..." 
+                                       class="w-full pl-4 pr-12 py-2 rounded-full border border-pink-200 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 text-sm">
+                                <button type="submit" class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-pink-600 focus:outline-none transition-colors duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-pink-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="py-4 px-6 font-bold text-sm text-gray-500 border-b border-gray-100">Nama</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-50">
+                                @if(isset($respondents) && count($respondents) > 0)
+                                    @foreach($respondents as $respondent)
+                                        <tr class="hover:bg-pink-50/30 transition duration-150 group">
+                                            <td class="py-4 px-6 text-gray-800 font-medium group-hover:text-pink-600 transition-colors">{{ $respondent['nama'] }}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="2" class="py-12 text-center text-gray-400 italic">Tidak Ada Data</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
 
-                <!-- <button @click="showResetModal = true" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 md:py-4 md:px-12 rounded-full text-lg md:text-xl shadow-lg transition duration-300 transform hover:scale-105 w-full md:w-auto text-center">
-                    Reset Data CSV
-                </button> -->
+                    <!-- Pagination Links -->
+                    <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-center">
+                        {{ $respondents->links('pagination::tailwind') }}
+                    </div>
+                </div>
             </div>
         </div>
 

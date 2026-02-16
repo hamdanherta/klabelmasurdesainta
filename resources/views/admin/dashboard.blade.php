@@ -70,10 +70,10 @@
             <!-- Right Side: Respondent Table -->
             <div class="w-full md:w-7/12">
                 <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-                    <div class="p-6 bg-pink-100 border-b border-pink-200 flex flex-col justify-between items-center gap-4">
-                        <div class="flex-col items-center space-y-4 w-full md:w-auto">
+                    <div class="p-6 bg-pink-100 border-b border-pink-200 flex flex-col justify-between items-center gap-6">
+                        <div class="flex flex-col items-center gap-3 w-full md:w-auto">
                             <h3 class="text-2xl text-center font-bold text-pink-600">Daftar Responden</h3>
-                            <span class="bg-white text-pink-500 text-xs font-bold px-3 py-1 rounded-full border border-pink-200 whitespace-nowrap">
+                            <span class="bg-white text-pink-500 text-xs font-bold px-4 py-1.5 rounded-full border border-pink-200 whitespace-nowrap shadow-sm">
                                 Bagian {{ $respondents->currentPage() }}
                             </span>
                         </div>
@@ -81,9 +81,9 @@
                         <form action="{{ route('admin.dashboard') }}" method="GET" class="w-full md:w-full">
                             <div class="relative w-full">
                                 <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Cari Nama..." 
-                                       class="w-full pl-4 pr-12 py-2 rounded-full border border-pink-200 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 text-sm">
-                                <button type="submit" class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-pink-600 focus:outline-none transition-colors duration-200">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-pink-400" viewBox="0 0 20 20" fill="currentColor">
+                                       class="w-full pl-5 pr-12 py-3 rounded-full border border-pink-200 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base shadow-sm transition-all duration-300">
+                                <button type="submit" class="absolute inset-y-0 right-0 pr-4 flex items-center hover:text-pink-600 focus:outline-none transition-colors duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-400" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                     </svg>
                                 </button>

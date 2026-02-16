@@ -69,8 +69,8 @@
 
             <!-- Right Side: Respondent Table -->
             <div class="w-full md:w-7/12">
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-                    <div class="p-6 bg-pink-50 border-b border-pink-100 flex flex-col justify-between items-center gap-4">
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+                    <div class="p-6 bg-pink-100 border-b border-pink-200 flex flex-col justify-between items-center gap-4">
                         <div class="flex-col items-center space-y-4 w-full md:w-auto">
                             <h3 class="text-2xl text-center font-bold text-pink-600">Daftar Responden</h3>
                             <span class="bg-white text-pink-500 text-xs font-bold px-3 py-1 rounded-full border border-pink-200 whitespace-nowrap">
@@ -95,14 +95,14 @@
                         <table class="w-full text-left border-collapse">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="py-4 px-6 font-bold text-sm text-gray-500 border-b border-gray-100">Nama</th>
+                                    <th class="py-4 px-6 font-bold text-sm text-gray-500 border-b border-gray-200">Nama</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-50">
+                            <tbody class="divide-y divide-gray-200">
                                 @if(isset($respondents) && count($respondents) > 0)
                                     @foreach($respondents as $respondent)
-                                        <tr class="hover:bg-pink-50/30 transition duration-150 group">
-                                            <td class="py-4 px-6 text-gray-800 font-medium group-hover:text-pink-600 transition-colors">{{ $respondent['nama'] }}</td>
+                                        <tr class="hover:bg-pink-50 transition duration-150 group">
+                                            <td class="py-4 px-6 text-gray-800 font-bold text-lg group-hover:text-pink-600 transition-colors">{{ $respondent['nama'] }}</td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -115,7 +115,7 @@
                     </div>
 
                     <!-- Pagination Links -->
-                    <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-center">
+                    <div class="p-4 border-t border-gray-200 bg-gray-50 flex justify-center">
                         {{ $respondents->links('pagination::tailwind') }}
                     </div>
                 </div>

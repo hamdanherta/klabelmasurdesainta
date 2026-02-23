@@ -66,6 +66,11 @@ class AdminController extends Controller
         }
 
         // Search Logic
+        $allNames = [];
+        if (!empty($respondents)) {
+            $allNames = array_column($respondents, 'nama');
+        }
+
         $search = request('search');
         if ($search) {
             $respondents = array_filter($respondents, function ($respondent) use ($search) {
@@ -82,8 +87,8 @@ class AdminController extends Controller
             count($respondents),
             $perPage,
             $currentPage,
-        ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
-            );
+            ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
+        );
 
         if ($search) {
             $respondentsPaginator->appends(['search' => $search]);
@@ -94,7 +99,8 @@ class AdminController extends Controller
             'lastRespondentName' => $lastRespondentName,
             'lastRespondentTime' => $lastRespondentTime,
             'respondents' => $respondentsPaginator,
-            'search' => $search
+            'search' => $search,
+            'allNames' => $allNames
         ]);
     }
 
@@ -125,8 +131,7 @@ class AdminController extends Controller
         try {
             file_put_contents($filePath, $header . "\n");
             return redirect()->back()->with('success', 'Data hasil kusioner berhasil di-reset.');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mereset data: ' . $e->getMessage());
         }
     }

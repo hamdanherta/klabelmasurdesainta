@@ -86,10 +86,6 @@
 
                 <!-- Recent Respondents Block -->
                 @if(isset($allNames) && count($allNames) > 0)
-                    @php
-                        // Ambil 30 nama terbaru untuk running text agar tidak membebani browser
-                        $marqueeNames = array_slice($allNames, 0, 30);
-                    @endphp
                     <div
                         class="w-full bg-pink-50 rounded-xl p-6 border border-pink-200 text-center shadow-sm mt-2">
                         <p class="text-gray-600 font-bold text-lg mb-4">Beberapa Orang yang telah Mengisi Kuesioner ini :</p>
@@ -99,11 +95,7 @@
                              style="mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);">
                             
                             <div class="flex flex-col items-center gap-3 animate-marquee-vertical hover:[animation-play-state:paused] w-full">
-                                @foreach($marqueeNames as $name)
-                                    <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow-sm w-max border border-pink-100">{{ $name }}</span>
-                                @endforeach
-                                <!-- Duplikat untuk menciptakan efek loop tanpa jeda -->
-                                @foreach($marqueeNames as $name)
+                                @foreach($allNames as $name)
                                     <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow-sm w-max border border-pink-100">{{ $name }}</span>
                                 @endforeach
                             </div>

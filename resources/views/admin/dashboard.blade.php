@@ -40,7 +40,8 @@
                     <h2 class="text-5xl md:text-7xl font-bold text-pink-500 leading-none mb-2 text-center md:text-left">
                         Datang.</h2>
                     <h2 class="text-5xl md:text-7xl font-bold text-gray-600 leading-none text-center md:text-left">
-                        {{ auth()->user()->name }}</h2>
+                        {{ auth()->user()->name }}
+                    </h2>
                 </div>
 
                 <!-- Data Count Info -->
@@ -88,46 +89,47 @@
                 @if(isset($allNames) && count($allNames) > 0)
                     <div class="w-full bg-pink-50 h-dvh rounded-xl p-6 border border-pink-200 text-center shadow">
 
-    <p class="text-gray-600 font-bold text-lg mb-4">
-        Special Thanks to <br/> (Para Responden)
-    </p>
+                        <p class="text-gray-600 font-bold text-lg mb-4">
+                            Special Thanks to <br /> (Para Responden)
+                        </p>
 
-    <!-- Marquee Container -->
-    <div class="relative h-full overflow-hidden w-full">
+                        <!-- Marquee Container -->
+                        <div class="relative h-full overflow-hidden w-full">
 
-        <div class="flex flex-col items-center gap-3 animate-marquee-vertical">
+                            <div class="flex flex-col items-center gap-3 animate-marquee-vertical">
 
-            @foreach($allNames as $name)
-                <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow">
-                    {{ $name }}
-                </span>
-            @endforeach
+                                @foreach($allNames as $name)
+                                    <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow">
+                                        {{ $name }}
+                                    </span>
+                                @endforeach
 
-            @foreach($allNames as $name)
-                <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow">
-                    {{ $name }}
-                </span>
-            @endforeach
+                                @foreach($allNames as $name)
+                                    <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow">
+                                        {{ $name }}
+                                    </span>
+                                @endforeach
 
-        </div>
-    </div>
+                            </div>
+                        </div>
 
-</div>
+                    </div>
 
                     <style>
-.animate-marquee-vertical {
-    animation: marquee-vertical 30s linear infinite;
-}
+                        .animate-marquee-vertical {
+                            animation: marquee-vertical 30s linear infinite;
+                        }
 
-@keyframes marquee-vertical {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-50%);
-    }
-}
-</style>
+                        @keyframes marquee-vertical {
+                            0% {
+                                transform: translateY(0);
+                            }
+
+                            100% {
+                                transform: translateY(-50%);
+                            }
+                        }
+                    </style>
                 @endif
             </div>
 
@@ -174,7 +176,8 @@
                                         <tr class="hover:bg-pink-50 transition duration-150 group">
                                             <td
                                                 class="py-6 px-6 text-gray-800 font-bold  text-lg group-hover:text-pink-600 transition-colors">
-                                                {{ $respondent['nama'] }}</td>
+                                                {{ $respondent['nama'] }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @else

@@ -26,14 +26,31 @@ class QuestionnaireController extends Controller
             }
         }
 
-        // Reverse to show latest first? or random? or just as is. 
-        // Let's keep it as is or maybe latest first. 
-        // User said "nama nama yang telah mengisi", implied all.
-        // Let's optimize by taking only unique names maybe? 
+        // Reserve data for counts and last respondent details before modifying the array for rendering
+        $responseCount = count($names);
+
+        $lastRespondentName = null;
+        $lastRespondentTime = null;
+
+        // Find the last respondent details from the CSV
+        if (file_exists($filePath)) {
+            if (($handle = fopen($filePath, "r")) !== FALSE) {
+                fgetcsv($handle); // Skip header
+                while (($data = fgetcsv($handle)) !== FALSE) {
+                    if (isset($data[1]) && !empty($data[1])) {
+                        $lastRespondentName = $data[1];
+                        // timestamp is at index 13 based on line 181: id, nama, nowa, kom_1...10, timestamp
+                        $lastRespondentTime = isset($data[13]) ? $data[13] : null;
+                    }
+                }
+                fclose($handle);
+            }
+        }
+
         // Actually, let's just reverse it to show latest submissions first, looks more dynamic.
         $names = array_reverse($names);
 
-        return view('welcome', compact('names'));
+        return view('welcome', compact('names', 'responseCount', 'lastRespondentName', 'lastRespondentTime'));
     }
 
     public function tutorial()
@@ -198,8 +215,7 @@ class QuestionnaireController extends Controller
 
             Mail::to('hamdanerbic@gmail.com')->send(new NewSubmissionMail($emailData));
 
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             // Log error but allow process to continue
             \Illuminate\Support\Facades\Log::error('Submission Error: ' . $e->getMessage());
         }

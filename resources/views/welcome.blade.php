@@ -22,8 +22,15 @@
             <!-- Right Side: Text & Actions -->
             <div class="w-full md:w-1/2 text-center md:text-left">
 
+                <!-- Data Count Info -->
+                <div class="w-full bg-pink-50 rounded-xl p-6 border border-pink-200 text-center md:text-left shadow-sm">
+                    <p class="text-gray-600 font-bold text-lg">Jumlah Responden :</p>
+                    <p class="text-4xl font-extrabold text-pink-600 mb-2">{{ $responseCount }} <span
+                            class="text-lg text-pink-400 font-medium">Orang</span></p>
+                </div>
+
                 <!-- Halo & Welcome Message -->
-                <div class="mb-6 h-fit leading-medium">
+                <div class="mb-6 mt-6 h-fit leading-medium">
                     <h1 class="text-5xl md:text-7xl font-extrabold text-pink-500 mb-2 leading-tight">KUESIONER <p
                             class="text-gray-600 text-3xl"> telah</p>SELESAI!</h1>
                     <h2 class="text-xl md:text-2xl font-bold text-pink-500 leading-tight">Terima Kasih telah menjadi Bagian
@@ -43,9 +50,9 @@
                 </div>
                 <!-- Button -->
                 <!-- <a href="{{ route('tutorial') }}"
-                        class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-12 md:px-16 rounded-full text-xl md:text-2xl shadow-lg transition duration-300 transform hover:scale-105">
-                        Lanjutkan
-                    </a> -->
+                            class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-12 md:px-16 rounded-full text-xl md:text-2xl shadow-lg transition duration-300 transform hover:scale-105">
+                            Lanjutkan
+                        </a> -->
 
 
 
@@ -53,7 +60,7 @@
                     <div class="w-full bg-pink-50 h-36 mt-10 rounded-xl p-6 border border-pink-200 text-center shadow">
 
                         <p class="text-gray-600 font-bold text-lg mb-4">
-                            Special Thanks to <br /> ( Para Responden ) <br /> 107 Orang Baik :)
+                            Special Thanks to <br /> ( Seluruh Responden ) <br /> Panjang Lebar <br /> Orang Baik :)
                         </p>
 
                         <!-- Marquee Container -->

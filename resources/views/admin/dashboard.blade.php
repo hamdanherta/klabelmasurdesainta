@@ -72,7 +72,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
-                        Download CSV
+                        Download Hasil
                     </a>
 
                     <form action="{{ route('admin.logout') }}" method="POST" class="w-full">
@@ -86,38 +86,48 @@
 
                 <!-- Recent Respondents Block -->
                 @if(isset($allNames) && count($allNames) > 0)
-                    <div
-                        class="w-full bg-pink-50 rounded-xl p-6 border border-pink-200 text-center shadow-sm mt-2">
-                        <p class="text-gray-600 font-bold text-lg mb-4">Beberapa Orang yang telah Mengisi Kuesioner ini :</p>
-                        
-                        <!-- Marquee Container -->
-                        <div class="relative h-48 overflow-hidden w-full" 
-                             style="mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);">
-                            
-                            <div class="flex flex-col items-center gap-3 animate-marquee-vertical hover:[animation-play-state:paused] w-full">
-                                @foreach($allNames as $name)
-                                    <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow-sm w-max border border-pink-100">{{ $name }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
+                    <div class="w-full bg-pink-50 h-dvh rounded-xl p-6 border border-pink-200 text-center shadow">
+
+    <p class="text-gray-600 font-bold text-lg mb-4">
+        Special Thanks to <br/> (Para Responden)
+    </p>
+
+    <!-- Marquee Container -->
+    <div class="relative h-full overflow-hidden w-full">
+
+        <div class="flex flex-col items-center gap-3 animate-marquee-vertical">
+
+            @foreach($allNames as $name)
+                <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow">
+                    {{ $name }}
+                </span>
+            @endforeach
+
+            @foreach($allNames as $name)
+                <span class="text-pink-600 font-bold text-xl px-4 py-1 bg-white rounded-full shadow">
+                    {{ $name }}
+                </span>
+            @endforeach
+
+        </div>
+    </div>
+
+</div>
 
                     <style>
-                        .animate-marquee-vertical {
-                            /* Sesuaikan durasi (25s) untuk mempercepat atau memperlambat scroll */
-                            animation: marquee-vertical 25s linear infinite;
-                        }
+.animate-marquee-vertical {
+    animation: marquee-vertical 30s linear infinite;
+}
 
-                        /* Efek berjalan vertikal dari atas ke bawah */
-                        @keyframes marquee-vertical {
-                            0% {
-                                transform: translateY(-50%);
-                            }
-                            100% {
-                                transform: translateY(0);
-                            }
-                        }
-                    </style>
+@keyframes marquee-vertical {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+</style>
                 @endif
             </div>
 

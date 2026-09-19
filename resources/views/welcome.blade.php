@@ -31,9 +31,8 @@
 
                     <!-- Halo & Welcome Message -->
                     <div class="mb-6 mt-6 h-fit leading-medium">
-                        <h1 class="text-5xl md:text-7xl font-extrabold text-pink-500 mb-2 leading-tight">KUESIONER <p
-                                class="text-gray-600 text-3xl"> telah</p>SELESAI!</h1>
-                        <h2 class="text-xl md:text-2xl font-bold text-pink-500 leading-tight">Terima Kasih telah menjadi
+                        <h1 class="text-5xl md:text-7xl font-extrabold text-pink-500 mb-2 leading-tight">HALO!<br>SELAMAT DATANG</h1>
+                        <h2 class="text-xl md:text-2xl font-bold text-pink-500 leading-tight">Terima Kasih telah bersedia menjadi
                             Bagian
                             dari Penelitian ini.</h2>
                     </div>
@@ -49,10 +48,10 @@
                 <!-- Data Count Info -->
 
                 <!-- Button -->
-                <!-- <a href="{{ route('tutorial') }}"
+                <a href="{{ route('tutorial') }}"
                         class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-12 md:px-16 rounded-full text-xl md:text-2xl shadow-lg transition duration-300 transform hover:scale-105">
                             Lanjutkan
-                    </a> -->
+                </a>
 
 
 
